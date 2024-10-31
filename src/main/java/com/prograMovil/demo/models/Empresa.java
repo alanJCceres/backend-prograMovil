@@ -6,6 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -24,6 +25,8 @@ public class Empresa {
     private String usuario;
     private String contrasenia;
     private String rol;
+    @OneToMany(mappedBy = "empresa")
+    private List<Convocatoria> convocatoriaList;
 
     public Empresa() {
     }
@@ -119,5 +122,13 @@ public class Empresa {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public List<Convocatoria> getConvocatoriaList() {
+        return convocatoriaList;
+    }
+
+    public void setConvocatoriaList(List<Convocatoria> convocatoriaList) {
+        this.convocatoriaList = convocatoriaList;
     }
 }
