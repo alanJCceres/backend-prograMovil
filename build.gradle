@@ -27,6 +27,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'mysql:mysql-connector-java:8.0.33'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor 'org.projectlombok:lombok:1.18.28'
 }
 
 tasks.named('test') {
