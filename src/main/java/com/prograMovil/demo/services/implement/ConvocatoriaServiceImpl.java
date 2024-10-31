@@ -27,35 +27,17 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     }
     @Override
     public ConvocatoriaDTO saveConvocatoria(ConvocatoriaDTO convocatoria){
-        EmpresaDTO empresaDTO = convocatoria.getEmpresa();
-        if(empresaDTO == null){
-            throw new NotFoundException("Empresa",null);
-        }
-       Optional<Empresa> empresa = empresaRepository.findById(empresaDTO.getId());
+       Optional<Empresa> empresa = empresaRepository.findById(convocatoria.getEmpresa());
         if(empresa.isEmpty()){
-            throw new NotFoundException("Empresa",empresaDTO.getId());
+            throw new NotFoundException("Empresa",convocatoria.getEmpresa());
         }
         Convocatoria convocatoria1 = toConvocatoria(convocatoria,empresa.get());
         convocatoriaRepository.save(convocatoria1);
-        return toDTO(convocatoria1,true);
+        return  new ConvocatoriaDTO(convocatoria1);
     }
     @Override
     public ConvocatoriaDTO updateConvocatoria(ConvocatoriaDTO convocatoria){
         return null;
-    }
-    private ConvocatoriaDTO toDTO(Convocatoria convocatoria, boolean mappEmpresa){
-        ConvocatoriaDTO dto = new ConvocatoriaDTO();
-        dto.setTitulo(convocatoria.getTitulo());
-        dto.setDescripcion(convocatoria.getDescripcion());
-        dto.setImagen(convocatoria.getImagen());
-        dto.setCantidadMaxPost(convocatoria.getCantidadMaxPost());
-        dto.setFechaInicio(convocatoria.getFechaInicio());
-        dto.setFechaFin(convocatoria.getFechaFin());
-        if(mappEmpresa){
-            dto.setEmpresa(empresaService.toDTO(convocatoria.getEmpresa()));
-        }
-        return dto;
-
     }
     public Convocatoria toConvocatoria(ConvocatoriaDTO dto, Empresa empresa){
         Convocatoria convoc = new Convocatoria();
