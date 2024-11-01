@@ -12,17 +12,17 @@ public class AuthService {
         this.storage = new HashMap<>();
     }
 
-    // Guardar el token en el almacenamiento simulado
+    // Guardar el token
     public void saveToken(String token) {
         storage.put(TOKEN_KEY, token);
     }
 
-    // Obtener el token desde el almacenamiento simulado
+    // Obtener el token 
     public String getToken() {
         return storage.get(TOKEN_KEY);
     }
 
-    // Eliminar el token del almacenamiento simulado
+    // Eliminar el token 
     public void removeToken() {
         storage.remove(TOKEN_KEY);
     }
