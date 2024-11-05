@@ -9,6 +9,7 @@ import com.prograMovil.demo.repositories.ConvocatoriaRepository;
 import com.prograMovil.demo.repositories.EmpresaRepository;
 import com.prograMovil.demo.services.ConvocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Service
 public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     @Autowired
+    @Lazy
     private EmpresaServiceImpl empresaService;
     @Autowired
     private EmpresaRepository empresaRepository;
@@ -49,5 +51,16 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
         convoc.setFechaFin(dto.getFechaFin());
         convoc.setEmpresa(empresa);
         return convoc;
+    }
+    public ConvocatoriaDTO toDTO(Convocatoria convocatoria){
+        ConvocatoriaDTO dto = new ConvocatoriaDTO();
+        dto.setTitulo(convocatoria.getTitulo());
+        dto.setDescripcion(convocatoria.getDescripcion());
+        dto.setImagen(convocatoria.getImagen());
+        dto.setCantidadMaxPost(convocatoria.getCantidadMaxPost());
+        dto.setFechaInicio(convocatoria.getFechaInicio());
+        dto.setFechaFin(convocatoria.getFechaFin());
+        dto.setEmpresa(convocatoria.getEmpresa().getId());
+        return dto;
     }
 }
