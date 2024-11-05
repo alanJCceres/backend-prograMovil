@@ -25,7 +25,11 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     private ConvocatoriaRepository convocatoriaRepository;
     @Override
     public ConvocatoriaDTO getConvocatoriaById(Integer idConvocatoria){
-        return null;
+        Convocatoria convocatoria = convocatoriaRepository.findById(idConvocatoria).get();
+        if (convocatoria == null) {
+            throw new NotFoundException("Convocatoria", idConvocatoria);
+        }
+        return toDTO(convocatoria);
     }
     @Override
     public ConvocatoriaDTO saveConvocatoria(ConvocatoriaDTO convocatoria){
@@ -54,6 +58,7 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     }
     public ConvocatoriaDTO toDTO(Convocatoria convocatoria){
         ConvocatoriaDTO dto = new ConvocatoriaDTO();
+        dto.setId(convocatoria.getId());
         dto.setTitulo(convocatoria.getTitulo());
         dto.setDescripcion(convocatoria.getDescripcion());
         dto.setImagen(convocatoria.getImagen());

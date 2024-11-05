@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class ConvocatoriaDTO {
+    private Integer id;
     private String titulo;
     private String descripcion;
     private String imagen;
