@@ -20,7 +20,7 @@ public class EmpresaController {
         EmpresaDTO empresaDTO1 = empresaService.saveEmpresa(empresaDTO);
         return new ResponseEntity<>(empresaDTO1, HttpStatus.CREATED);
     }
-    @GetMapping("/convocatorias/{idEmpresa}")
+    @GetMapping("/{idEmpresa}/convocatorias")
     public List<ConvocatoriaDTO> getConvocatorias(@PathVariable Integer idEmpresa){
         return this.empresaService.getConvocatorias(idEmpresa);
     }
