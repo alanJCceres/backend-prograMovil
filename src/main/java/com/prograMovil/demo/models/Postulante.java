@@ -28,7 +28,7 @@ public class Postulante {
     @LastModifiedDate
     private Date updatedAt;
     @OneToMany(mappedBy = "postulante")
-    private List<PostulanteConvocatoria> convocatorias;
+    private List<PostulanteConvocatoria> datosAdicionales;
     public Postulante() {}
 
     public Postulante(Integer id, String nombre, String apellido, String carrera, String descripcion, String celular, String correo, String usuario, String contrasenia, String rol, Date createdAt, Date updatedAt, List<PostulanteConvocatoria> convocatorias) {
@@ -44,7 +44,7 @@ public class Postulante {
         this.rol = rol;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.convocatorias = convocatorias;
+        this.datosAdicionales = convocatorias;
     }
 
     public Integer getId() {
@@ -144,10 +144,10 @@ public class Postulante {
     }
 
     public List<PostulanteConvocatoria> getConvocatorias() {
-        return convocatorias;
+        return datosAdicionales;
     }
 
     public void setConvocatorias(List<PostulanteConvocatoria> convocatorias) {
-        this.convocatorias = convocatorias;
+        this.datosAdicionales = convocatorias;
     }
 }

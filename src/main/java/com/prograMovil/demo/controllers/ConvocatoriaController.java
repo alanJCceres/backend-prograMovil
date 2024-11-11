@@ -28,4 +28,8 @@ public class ConvocatoriaController {
     public List<PostulanteDTO> getPostulantes(@PathVariable Integer id){
         return this.convocatoriaService.getPostulantes(id);
     }
+    @GetMapping("/{idConvocatoria}/postulantes/{idPostulante}")
+    public PostulanteDTO getPostulante(@PathVariable Integer idConvocatoria, @PathVariable Integer idPostulante) {
+        return this.convocatoriaService.getPostulante(idConvocatoria, idPostulante);
+    }
 }

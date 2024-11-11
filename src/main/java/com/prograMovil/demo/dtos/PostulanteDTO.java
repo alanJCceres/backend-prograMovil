@@ -1,6 +1,8 @@
 package com.prograMovil.demo.dtos;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -18,4 +20,5 @@ public class PostulanteDTO {
     private String usuario;
     private String contrasenia;
     private String rol;
+    private List<PostulanteConvocatoriaDTO> datosAdicionales;
 }
