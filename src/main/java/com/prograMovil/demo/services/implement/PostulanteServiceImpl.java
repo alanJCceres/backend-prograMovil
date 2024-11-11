@@ -40,6 +40,7 @@ public class PostulanteServiceImpl implements PostulanteService {
     }
     public PostulanteDTO toDTO(Postulante postulante){
         PostulanteDTO dto = new PostulanteDTO();
+        dto.setId(postulante.getId());
         dto.setNombre(postulante.getNombre());
         dto.setApellido(postulante.getApellido());
         dto.setCarrera(postulante.getCarrera());

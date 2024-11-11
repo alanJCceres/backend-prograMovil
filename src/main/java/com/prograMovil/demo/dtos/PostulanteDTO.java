@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostulanteDTO {
-    private String id;
+    private Integer id;
     private String nombre;
     private String apellido;
     private String carrera;

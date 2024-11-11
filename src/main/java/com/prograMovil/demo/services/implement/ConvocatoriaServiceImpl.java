@@ -2,17 +2,24 @@ package com.prograMovil.demo.services.implement;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
+import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
 import com.prograMovil.demo.models.Convocatoria;
 import com.prograMovil.demo.models.Empresa;
+import com.prograMovil.demo.models.Postulante;
+import com.prograMovil.demo.models.PostulanteConvocatoria;
 import com.prograMovil.demo.repositories.ConvocatoriaRepository;
 import com.prograMovil.demo.repositories.EmpresaRepository;
 import com.prograMovil.demo.services.ConvocatoriaService;
+import com.prograMovil.demo.services.implement.PostulanteServiceImpl;
+import jakarta.persistence.PostUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConvocatoriaServiceImpl implements ConvocatoriaService {
@@ -23,6 +30,10 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     private EmpresaRepository empresaRepository;
     @Autowired
     private ConvocatoriaRepository convocatoriaRepository;
+    @Autowired
+    @Lazy
+    private PostulanteServiceImpl postulanteService;
+
     @Override
     public ConvocatoriaDTO getConvocatoriaById(Integer idConvocatoria){
         Convocatoria convocatoria = convocatoriaRepository.findById(idConvocatoria).get();
@@ -44,6 +55,22 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     @Override
     public ConvocatoriaDTO updateConvocatoria(ConvocatoriaDTO convocatoria){
         return null;
+    }
+    @Override
+    public List<PostulanteDTO> getPostulantes(Integer idConvocatoria){
+        Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
+        if(convocatoria.isPresent()) {
+            List<Postulante> postulantes = convocatoria.get().getPostulantes()
+                    .stream()
+                    .map(PostulanteConvocatoria::getPostulante)
+                    .collect(Collectors.toList());
+            return postulantes.
+                    stream()
+                    .map(postulante -> postulanteService.toDTO(postulante))
+                    .collect(Collectors.toList());
+        }else{
+            throw new NotFoundException("Convocatoria", idConvocatoria);
+        }
     }
     public Convocatoria toConvocatoria(ConvocatoriaDTO dto, Empresa empresa){
         Convocatoria convoc = new Convocatoria();

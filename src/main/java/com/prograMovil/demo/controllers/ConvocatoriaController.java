@@ -1,11 +1,14 @@
 package com.prograMovil.demo.controllers;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
+import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.services.implement.ConvocatoriaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/convocatorias")
@@ -19,6 +22,10 @@ public class ConvocatoriaController {
     }
     @GetMapping("/{id}")
     public ConvocatoriaDTO getConvocatoria(@PathVariable Integer id) {
-        return convocatoriaService.getConvocatoriaById(id);
+        return this.convocatoriaService.getConvocatoriaById(id);
+    }
+    @GetMapping("/{id}/postulantes")
+    public List<PostulanteDTO> getPostulantes(@PathVariable Integer id){
+        return this.convocatoriaService.getPostulantes(id);
     }
 }
