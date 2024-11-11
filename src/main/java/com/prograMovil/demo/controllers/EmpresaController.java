@@ -24,4 +24,8 @@ public class EmpresaController {
     public List<ConvocatoriaDTO> getConvocatorias(@PathVariable Integer idEmpresa){
         return this.empresaService.getConvocatorias(idEmpresa);
     }
+    @PostMapping("/login")
+    public Integer loginEmpresa(@RequestBody EmpresaDTO empresaDTO){
+        return this.empresaService.loginEmpresa(empresaDTO);
+    }
 }

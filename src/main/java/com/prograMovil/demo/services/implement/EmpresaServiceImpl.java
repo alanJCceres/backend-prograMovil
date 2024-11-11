@@ -35,6 +35,16 @@ public class EmpresaServiceImpl implements EmpresaService {
         }
     }
     @Override
+    public Integer loginEmpresa(EmpresaDTO empresaDTO) {
+        Empresa empresa = toEmpresa(empresaDTO);
+        Optional<Empresa> getEmpresa= empresaRepository.findByUsuarioAndContrasenia(empresa.getUsuario(), empresa.getContrasenia());
+        if(getEmpresa.isPresent()) {
+            return getEmpresa.get().getId();
+        }else{
+            throw new NotFoundException("La empresa no existe",404);
+        }
+    }
+    @Override
     public EmpresaDTO saveEmpresa(EmpresaDTO empresa){
         Empresa empresa1 = toEmpresa(empresa);
         return toDTO(empresaRepository.save(empresa1));

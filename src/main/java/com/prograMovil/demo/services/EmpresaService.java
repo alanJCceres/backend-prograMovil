@@ -10,4 +10,5 @@ public interface EmpresaService {
     EmpresaDTO saveEmpresa(EmpresaDTO empresa);
     EmpresaDTO updateEmpresa(EmpresaDTO empresa);
     List<ConvocatoriaDTO> getConvocatorias(Integer idEmpresa);
+    Integer loginEmpresa(EmpresaDTO empresa);
 }
