@@ -2,7 +2,9 @@ package com.prograMovil.demo.services.implement;
 
 import com.prograMovil.demo.dtos.PostulanteConvocatoriaDTO;
 import com.prograMovil.demo.models.PostulanteConvocatoria;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PostulanteConvocImpl {
     public PostulanteConvocatoriaDTO toDTO(PostulanteConvocatoria postulante) {
         PostulanteConvocatoriaDTO dto = new PostulanteConvocatoriaDTO();

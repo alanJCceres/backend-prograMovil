@@ -66,7 +66,7 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
                     .collect(Collectors.toList());
             return postulantes.
                     stream()
-                    .map(postulante -> postulanteService.toDTO(postulante))
+                    .map(postulante -> postulanteService.toDTO(postulante,null))
                     .collect(Collectors.toList());
         }else{
             throw new NotFoundException("Convocatoria", idConvocatoria);
@@ -81,9 +81,16 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
                     .map(PostulanteConvocatoria::getPostulante)
                     .filter(p -> p.getId().equals(idPostulante))
                     .findFirst();
-
              if(postulante.isPresent()){
-                 return postulanteService.toDTO(postulante.get());
+                 Optional<PostulanteConvocatoria> datosAdicionales = convocatoria.get().getPostulantes()
+                         .stream()
+                         .filter(p -> p.getPostulante().equals(postulante.get()))
+                         .findFirst();
+                 if(datosAdicionales.isPresent()) {
+                     return postulanteService.toDTO(postulante.get(),datosAdicionales.get());
+                 }else{
+                     throw new NotFoundException("Postulante Sin datos adicionales", idPostulante);
+                 }
              }else{
                  throw new NotFoundException("Postulante", idPostulante);
              }

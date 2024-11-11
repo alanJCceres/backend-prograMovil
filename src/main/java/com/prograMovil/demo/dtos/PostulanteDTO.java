@@ -20,5 +20,5 @@ public class PostulanteDTO {
     private String usuario;
     private String contrasenia;
     private String rol;
-    private List<PostulanteConvocatoriaDTO> datosAdicionales;
+    private PostulanteConvocatoriaDTO datosAdicionales;
 }

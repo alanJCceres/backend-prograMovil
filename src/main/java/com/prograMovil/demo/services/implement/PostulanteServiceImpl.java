@@ -3,6 +3,7 @@ package com.prograMovil.demo.services.implement;
 import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
 import com.prograMovil.demo.models.Postulante;
+import com.prograMovil.demo.models.PostulanteConvocatoria;
 import com.prograMovil.demo.repositories.PostulanteRepository;
 import com.prograMovil.demo.services.PostulanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class PostulanteServiceImpl implements PostulanteService {
     @Autowired
     private PostulanteRepository postulanteRepository;
+    @Autowired
+    private PostulanteConvocImpl postulanteConvocImpl;
 
     @Override
     public PostulanteDTO getPostulante(Integer id){
@@ -38,7 +41,7 @@ public class PostulanteServiceImpl implements PostulanteService {
     public Postulante savePostulante(PostulanteDTO postulanteDTO){
         return null;
     }
-    public PostulanteDTO toDTO(Postulante postulante){
+    public PostulanteDTO toDTO(Postulante postulante, PostulanteConvocatoria postulanteConvocatoria){
         PostulanteDTO dto = new PostulanteDTO();
         dto.setId(postulante.getId());
         dto.setNombre(postulante.getNombre());
@@ -48,6 +51,10 @@ public class PostulanteServiceImpl implements PostulanteService {
         dto.setCelular(postulante.getCelular());
         dto.setCorreo(postulante.getCorreo());
         dto.setRol(postulante.getRol());
+        if(postulanteConvocatoria != null){
+            dto.setDatosAdicionales(postulanteConvocImpl.toDTO(postulanteConvocatoria));
+            //dto.setDatosAdicionales()
+        }
         return dto;
     }
     public Postulante toPostulante(PostulanteDTO postulanteDTO){
