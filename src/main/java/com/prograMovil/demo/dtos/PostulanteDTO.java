@@ -15,5 +15,7 @@ public class PostulanteDTO {
     private String descripcion;
     private String celular;
     private String correo;
+    private String usuario;
+    private String contrasenia;
     private String rol;
 }

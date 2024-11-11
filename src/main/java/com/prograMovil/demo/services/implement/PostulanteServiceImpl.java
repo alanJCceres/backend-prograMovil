@@ -25,6 +25,16 @@ public class PostulanteServiceImpl implements PostulanteService {
         }
     }
     @Override
+    public Integer loginPostulante(PostulanteDTO postulante){
+        Postulante postulante1 = toPostulante(postulante);
+        Optional<Postulante> postulante2 = postulanteRepository.findByUsuarioAndContrasenia(postulante.getUsuario(), postulante.getContrasenia());
+        if(postulante2.isPresent()){
+            return postulante2.get().getId();
+        }else{
+            throw new NotFoundException("Postulante", 404);
+        }
+    }
+    @Override
     public Postulante savePostulante(PostulanteDTO postulanteDTO){
         return null;
     }
