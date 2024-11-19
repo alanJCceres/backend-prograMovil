@@ -1,6 +1,7 @@
 package com.prograMovil.demo.services.implement;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
+import com.prograMovil.demo.dtos.ConvocatoriaForTableDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
 import com.prograMovil.demo.models.Convocatoria;
@@ -54,7 +55,7 @@ public class EmpresaServiceImpl implements EmpresaService {
         return null;
     }
 
-    @Override
+    /*@Override
     public List<ConvocatoriaDTO> getConvocatorias(Integer idEmpresa){
         Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
@@ -63,6 +64,16 @@ public class EmpresaServiceImpl implements EmpresaService {
                     .stream()
                     .map(convocatoria -> convocatoriaServiceImpl.toDTO(convocatoria))
                     .collect(Collectors.toList());
+        }else{
+            throw new NotFoundException("Empresa", idEmpresa);
+        }
+    }*/
+
+    @Override
+    public List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa){
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        if (empresa.isPresent()) {
+            return convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
         }else{
             throw new NotFoundException("Empresa", idEmpresa);
         }

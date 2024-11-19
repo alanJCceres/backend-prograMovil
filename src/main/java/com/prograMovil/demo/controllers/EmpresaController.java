@@ -1,6 +1,7 @@
 package com.prograMovil.demo.controllers;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
+import com.prograMovil.demo.dtos.ConvocatoriaForTableDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
 import com.prograMovil.demo.services.implement.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class EmpresaController {
         return new ResponseEntity<>(empresaDTO1, HttpStatus.CREATED);
     }
     @GetMapping("/{idEmpresa}/convocatorias")
-    public List<ConvocatoriaDTO> getConvocatorias(@PathVariable Integer idEmpresa){
+    public List<ConvocatoriaForTableDTO> getConvocatorias(@PathVariable Integer idEmpresa){
         return this.empresaService.getConvocatorias(idEmpresa);
     }
     @PostMapping("/login")
