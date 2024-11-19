@@ -24,6 +24,7 @@ public class ConvocatoriaForTableDTO {
     private Date fechaFin;
     private Integer empresa;
     private Long postulantes;
+    private boolean vigente;
 
     public ConvocatoriaForTableDTO(Convocatoria convocatoria, Long postulantes) {
         this.id = convocatoria.getId();

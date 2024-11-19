@@ -77,10 +77,25 @@ public class EmpresaServiceImpl implements EmpresaService {
 
     @Override
     public List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa){
-        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+       /* Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
             return convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
         }else{
+            throw new NotFoundException("Empresa", idEmpresa);
+        }*/
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        if (empresa.isPresent()) {
+            List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
+            Date fechaActual = new Date();
+
+            // Calcular el campo "vigente" para cada DTO
+            return convocatorias.stream()
+                    .map(dto -> {
+                        dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+        } else {
             throw new NotFoundException("Empresa", idEmpresa);
         }
     }
