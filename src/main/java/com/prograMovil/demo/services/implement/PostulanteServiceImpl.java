@@ -2,6 +2,7 @@ package com.prograMovil.demo.services.implement;
 
 import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
+import com.prograMovil.demo.models.Empresa;
 import com.prograMovil.demo.models.Postulante;
 import com.prograMovil.demo.models.PostulanteConvocatoria;
 import com.prograMovil.demo.repositories.PostulanteRepository;
@@ -67,8 +68,9 @@ public class PostulanteServiceImpl implements PostulanteService {
     }
 
     @Override
-    public Postulante savePostulante(PostulanteDTO postulanteDTO){
-        return null;
+    public PostulanteDTO savePostulante(PostulanteDTO postulanteDTO){
+        Postulante postulante = toPostulante(postulanteDTO);
+        return toDTO(postulanteRepository.save(postulante),null);
     }
     public PostulanteDTO toDTO(Postulante postulante, PostulanteConvocatoria postulanteConvocatoria){
         PostulanteDTO dto = new PostulanteDTO();
@@ -94,6 +96,8 @@ public class PostulanteServiceImpl implements PostulanteService {
         postulante.setDescripcion(postulanteDTO.getDescripcion());
         postulante.setCelular(postulanteDTO.getCelular());
         postulante.setCorreo(postulanteDTO.getCorreo());
+        postulante.setUsuario(postulanteDTO.getUsuario());
+        postulante.setContrasenia(postulanteDTO.getContrasenia());
         postulante.setRol(postulanteDTO.getRol());
         return postulante;
     }
