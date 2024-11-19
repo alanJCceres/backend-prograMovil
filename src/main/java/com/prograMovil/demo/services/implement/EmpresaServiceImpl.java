@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,10 +60,15 @@ public class EmpresaServiceImpl implements EmpresaService {
     public List<ConvocatoriaDTO> getConvocatorias(Integer idEmpresa){
         Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
+            Date fechaActual = new Date();
             List<Convocatoria> convocatorias = convocatoriaRepository.findAllByEmpresaId(empresa.get());
             return convocatorias
                     .stream()
-                    .map(convocatoria -> convocatoriaServiceImpl.toDTO(convocatoria))
+                    .map(convocatoria -> {
+                            ConvocatoriaDTO dto = convocatoriaServiceImpl.toDTO(convocatoria);
+                            dto.setVigente(convocatoria.getFechaInicio().before(fechaActual) && convocatoria.getFechaFin().after(fechaActual));
+                        return dto;
+                    })
                     .collect(Collectors.toList());
         }else{
             throw new NotFoundException("Empresa", idEmpresa);
@@ -71,10 +77,25 @@ public class EmpresaServiceImpl implements EmpresaService {
 
     @Override
     public List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa){
-        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+       /* Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
             return convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
         }else{
+            throw new NotFoundException("Empresa", idEmpresa);
+        }*/
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        if (empresa.isPresent()) {
+            List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
+            Date fechaActual = new Date();
+
+            // Calcular el campo "vigente" para cada DTO
+            return convocatorias.stream()
+                    .map(dto -> {
+                        dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+        } else {
             throw new NotFoundException("Empresa", idEmpresa);
         }
     }

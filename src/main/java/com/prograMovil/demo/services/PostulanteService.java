@@ -5,6 +5,7 @@ import com.prograMovil.demo.models.Postulante;
 
 public interface PostulanteService {
     PostulanteDTO getPostulante(Integer id);
-    Postulante savePostulante(PostulanteDTO postulante);
+    PostulanteDTO savePostulante(PostulanteDTO postulante);
     Integer loginPostulante(PostulanteDTO postulante);
+    void setPostulante(PostulanteDTO postulante);
 }
