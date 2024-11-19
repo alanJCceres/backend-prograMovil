@@ -17,7 +17,8 @@ public class PostulanteConvocatoria {
     private String curriculum;
     @ManyToOne(fetch = FetchType.LAZY)
     private Postulante postulante;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "convocatoria_id")
     private Convocatoria convocatoria;
     @CreatedDate
     private Date createdAt;

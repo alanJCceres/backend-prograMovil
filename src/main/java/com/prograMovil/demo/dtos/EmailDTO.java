@@ -2,14 +2,18 @@ package com.prograMovil.demo.dtos;
 
 public class EmailDTO {
     private String destinatario;
-    private String asunto;
-    private String mensaje;
+    private Integer idPostulante;
+    private Integer idConvocatoria;
+    private String tituloConvocatoria;
+    private boolean aceptado;
     public EmailDTO() {}
 
-    public EmailDTO(String mensaje, String asunto, String destinatario) {
-        this.mensaje = mensaje;
-        this.asunto = asunto;
+    public EmailDTO(String destinatario, Integer idPostulante, String tituloConvocatoria, boolean aceptado, Integer idConvocatoria) {
         this.destinatario = destinatario;
+        this.idPostulante = idPostulante;
+        this.tituloConvocatoria = tituloConvocatoria;
+        this.aceptado = aceptado;
+        this.idConvocatoria = idConvocatoria;
     }
 
     public String getDestinatario() {
@@ -20,19 +24,34 @@ public class EmailDTO {
         this.destinatario = destinatario;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public boolean isAceptado() {
+        return aceptado;
+    }
+    public void setAceptado(boolean aceptado) {
+        this.aceptado = aceptado;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public Integer getIdPostulante() {
+        return idPostulante;
     }
 
-    public String getAsunto() {
-        return asunto;
+    public void setIdPostulante(Integer idPostulante) {
+        this.idPostulante = idPostulante;
     }
 
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
+    public String getTituloConvocatoria() {
+        return tituloConvocatoria;
+    }
+
+    public void setTituloConvocatoria(String tituloConvocatoria) {
+        this.tituloConvocatoria = tituloConvocatoria;
+    }
+
+    public Integer getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    public void setIdConvocatoria(Integer idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
     }
 }

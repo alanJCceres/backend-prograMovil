@@ -7,4 +7,5 @@ public interface PostulanteService {
     PostulanteDTO getPostulante(Integer id);
     Postulante savePostulante(PostulanteDTO postulante);
     Integer loginPostulante(PostulanteDTO postulante);
+    void setPostulante(PostulanteDTO postulante);
 }

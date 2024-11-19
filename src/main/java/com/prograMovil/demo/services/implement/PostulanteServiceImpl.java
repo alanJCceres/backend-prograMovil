@@ -22,7 +22,7 @@ public class PostulanteServiceImpl implements PostulanteService {
     public PostulanteDTO getPostulante(Integer id){
         Optional<Postulante> postulante = postulanteRepository.findById(id);
         if(postulante.isPresent()){
-            return null;
+            return toDTO(postulante.get(),null);
         }else{
             throw new NotFoundException("Postulante", id);
         }
@@ -37,6 +37,35 @@ public class PostulanteServiceImpl implements PostulanteService {
             throw new NotFoundException("Postulante", 404);
         }
     }
+    @Override
+    public void setPostulante(PostulanteDTO postulantedto){
+        Optional<Postulante> postulante = postulanteRepository.findById(postulantedto.getId());
+        if(postulante.isPresent()){
+            Postulante getPostulante = postulante.get();
+            if (postulantedto.getNombre() != null) {
+                getPostulante.setNombre(postulantedto.getNombre());
+            }
+            if (postulantedto.getApellido() != null) {
+                getPostulante.setApellido(postulantedto.getApellido());
+            }
+            if (postulantedto.getCarrera() != null) {
+                getPostulante.setCarrera(postulantedto.getCarrera());
+            }
+            if(postulantedto.getDescripcion() != null) {
+                getPostulante.setDescripcion(postulantedto.getDescripcion());
+            }
+            if(postulantedto.getCelular() != null) {
+                getPostulante.setCelular(postulantedto.getCelular());
+            }
+            if(postulantedto.getCorreo() != null) {
+                getPostulante.setCorreo(postulantedto.getCorreo());
+            }
+            postulanteRepository.save(getPostulante);
+        }else{
+            throw new NotFoundException("Postulante", postulantedto.getId());
+        }
+    }
+
     @Override
     public Postulante savePostulante(PostulanteDTO postulanteDTO){
         return null;
