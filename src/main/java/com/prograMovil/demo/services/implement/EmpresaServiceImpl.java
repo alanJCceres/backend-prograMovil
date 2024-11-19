@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,10 +59,15 @@ public class EmpresaServiceImpl implements EmpresaService {
     public List<ConvocatoriaDTO> getConvocatorias(Integer idEmpresa){
         Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
+            Date fechaActual = new Date();
             List<Convocatoria> convocatorias = convocatoriaRepository.findAllByEmpresaId(empresa.get());
             return convocatorias
                     .stream()
-                    .map(convocatoria -> convocatoriaServiceImpl.toDTO(convocatoria))
+                    .map(convocatoria -> {
+                            ConvocatoriaDTO dto = convocatoriaServiceImpl.toDTO(convocatoria);
+                            dto.setVigente(convocatoria.getFechaInicio().before(fechaActual) && convocatoria.getFechaFin().after(fechaActual));
+                        return dto;
+                    })
                     .collect(Collectors.toList());
         }else{
             throw new NotFoundException("Empresa", idEmpresa);

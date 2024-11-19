@@ -25,6 +25,7 @@ public class ConvocatoriaDTO {
     private Date fechaInicio;
     private Date fechaFin;
     private Integer empresa;
+    private boolean vigente;
     //private List<Postulante> postulanteList;
 
     public ConvocatoriaDTO(Convocatoria convocatoria) {
