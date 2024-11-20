@@ -10,6 +10,7 @@ import com.prograMovil.demo.repositories.ConvocatoriaRepository;
 import com.prograMovil.demo.repositories.EmpresaRepository;
 import com.prograMovil.demo.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,43 +53,39 @@ public class EmpresaServiceImpl implements EmpresaService {
         return toDTO(empresaRepository.save(empresa1));
     }
     @Override
-    public EmpresaDTO updateEmpresa(EmpresaDTO empresa){
-        return null;
-    }
-
-    /*@Override
-    public List<ConvocatoriaDTO> getConvocatorias(Integer idEmpresa){
-        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
-        if (empresa.isPresent()) {
-            Date fechaActual = new Date();
-            List<Convocatoria> convocatorias = convocatoriaRepository.findAllByEmpresaId(empresa.get());
-            return convocatorias
-                    .stream()
-                    .map(convocatoria -> {
-                            ConvocatoriaDTO dto = convocatoriaServiceImpl.toDTO(convocatoria);
-                            dto.setVigente(convocatoria.getFechaInicio().before(fechaActual) && convocatoria.getFechaFin().after(fechaActual));
-                        return dto;
-                    })
-                    .collect(Collectors.toList());
+    public ResponseEntity<String> setEmpresa(Integer idEmpresa, EmpresaDTO empresa){
+        Optional<Empresa> empresa1 = empresaRepository.findById(idEmpresa);
+        if(empresa1.isPresent()) {
+            Empresa getEmpresa = empresa1.get();
+            if(empresa.getNombre() != null){
+                getEmpresa.setNombre(empresa.getNombre());
+            }
+            if(empresa.getUbicacion() != null){
+                getEmpresa.setUbicacion(empresa.getUbicacion());
+            }
+            if(empresa.getImagen() != null){
+                getEmpresa.setImagen(empresa.getImagen());
+            }
+            if(empresa.getNit() != null){
+                getEmpresa.setNit(empresa.getNit());
+            }
+            if(empresa.getUsuario() != null){
+                empresa.setUsuario(empresa.getUsuario());
+            }
+            empresaRepository.save(getEmpresa);
+            return ResponseEntity.ok("");
         }else{
             throw new NotFoundException("Empresa", idEmpresa);
         }
-    }*/
+    }
 
     @Override
     public List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa){
-       /* Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
-        if (empresa.isPresent()) {
-            return convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
-        }else{
-            throw new NotFoundException("Empresa", idEmpresa);
-        }*/
         Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
             List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
             Date fechaActual = new Date();
 
-            // Calcular el campo "vigente" para cada DTO
             return convocatorias.stream()
                     .map(dto -> {
                         dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
