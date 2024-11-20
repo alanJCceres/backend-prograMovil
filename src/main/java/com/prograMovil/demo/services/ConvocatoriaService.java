@@ -13,4 +13,5 @@ public interface ConvocatoriaService {
     ConvocatoriaDTO updateConvocatoria(ConvocatoriaDTO convocatoria);
     List<PostulanteDTO> getPostulantes(Integer idConvoctoria);
     PostulanteDTO getPostulante(Integer idConvocatoria, Integer idPostulante);
+    List<ConvocatoriaDTO> getAllConvocatorias();
 }

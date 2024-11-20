@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -97,6 +98,16 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
         }else{
             throw new NotFoundException("Convocatoria", idConvocatoria);
         }
+    }
+    @Override
+    public List<ConvocatoriaDTO> getAllConvocatorias(){
+        Date fechaActual = new Date();
+        List<Convocatoria> convocatorias=convocatoriaRepository.findAll();
+        return convocatorias.stream()
+                .filter(c -> fechaActual.compareTo(c.getFechaInicio()) >= 0 && fechaActual.compareTo(c.getFechaFin()) <= 0)
+                .map(ConvocatoriaDTO::new)
+                .collect(Collectors.toList());
+
     }
 
     public Convocatoria toConvocatoria(ConvocatoriaDTO dto, Empresa empresa){

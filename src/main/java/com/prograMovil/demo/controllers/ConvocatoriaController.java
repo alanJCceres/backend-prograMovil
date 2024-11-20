@@ -32,4 +32,8 @@ public class ConvocatoriaController {
     public PostulanteDTO getPostulante(@PathVariable Integer idConvocatoria, @PathVariable Integer idPostulante) {
         return this.convocatoriaService.getPostulante(idConvocatoria, idPostulante);
     }
+    @GetMapping
+    public List<ConvocatoriaDTO> getAllConvocatorias(){
+        return this.convocatoriaService.getAllConvocatorias();
+    }
 }
