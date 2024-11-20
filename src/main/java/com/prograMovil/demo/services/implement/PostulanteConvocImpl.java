@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostulanteConvocImpl implements PostulanteConvocService {
@@ -57,6 +59,19 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
             return ResponseEntity.ok("Postulacion exitosa");
         }else{
             throw new NotFoundException("No se encontro al postulante o la convocatoria", 404);
+        }
+    }
+    @Override
+    public List<ConvocatoriaDTO> getAllConvocatorias(Integer idPostulante){
+        Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
+        if(postulante.isPresent()){
+            List<Convocatoria> convocatorias = postulanteConvocatoriaRepository.findConvocatoriasByPostulante(postulante.get());
+            return convocatorias.stream()
+                    .map(ConvocatoriaDTO::new)
+                    .collect(Collectors.toList());
+
+        }else{
+            throw new NotFoundException("No existe el postulante con id: ", idPostulante);
         }
     }
 

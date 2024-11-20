@@ -1,5 +1,6 @@
 package com.prograMovil.demo.controllers;
 
+import com.prograMovil.demo.dtos.ConvocatoriaDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
 import com.prograMovil.demo.dtos.PostulanteConvocatoriaDTO;
 import com.prograMovil.demo.dtos.PostulanteDTO;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/postulantes")
@@ -41,5 +44,9 @@ public class PostulanteController {
     public ResponseEntity<String> postularse(@PathVariable Integer idPostulante, @PathVariable Integer idConvocatoria, @RequestBody PostulanteConvocatoriaDTO postulanteConvocatoria) {
         String curriculum = postulanteConvocatoria.getCurriculum();
         return postulanteConvocService.postularse(idPostulante, idConvocatoria, curriculum);
+    }
+    @GetMapping("/{idPostulante}/all-convocatorias")
+    public List<ConvocatoriaDTO> allConvocatorias(@PathVariable Integer idPostulante){
+        return postulanteConvocService.getAllConvocatorias(idPostulante);
     }
 }
