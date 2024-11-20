@@ -14,6 +14,7 @@ import com.prograMovil.demo.services.PostulanteConvocService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,6 +44,22 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
         }
 
     }
+    @Override
+    public ResponseEntity<String> postularse(Integer idPostulante, Integer idConvocatoria, String pathCurriculum){
+        Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
+        Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
+        if(postulante.isPresent() && convocatoria.isPresent()){
+            PostulanteConvocatoria postulanteConvocatoria = new PostulanteConvocatoria();
+            postulanteConvocatoria.setPostulante(postulante.get());
+            postulanteConvocatoria.setConvocatoria(convocatoria.get());
+            postulanteConvocatoria.setCurriculum(pathCurriculum);
+            postulanteConvocatoriaRepository.save(postulanteConvocatoria);
+            return ResponseEntity.ok("Postulacion exitosa");
+        }else{
+            throw new NotFoundException("No se encontro al postulante o la convocatoria", 404);
+        }
+    }
+
     public PostulanteConvocatoria getPostulantConvocatoria(Integer idPostulante,Integer idConvocatoria){
         Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
         Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
