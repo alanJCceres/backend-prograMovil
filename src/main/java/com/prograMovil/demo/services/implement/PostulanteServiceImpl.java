@@ -8,6 +8,7 @@ import com.prograMovil.demo.models.PostulanteConvocatoria;
 import com.prograMovil.demo.repositories.PostulanteRepository;
 import com.prograMovil.demo.services.PostulanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -39,8 +40,8 @@ public class PostulanteServiceImpl implements PostulanteService {
         }
     }
     @Override
-    public void setPostulante(PostulanteDTO postulantedto){
-        Optional<Postulante> postulante = postulanteRepository.findById(postulantedto.getId());
+    public ResponseEntity<String> setPostulante(Integer idPostulante, PostulanteDTO postulantedto){
+        Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
         if(postulante.isPresent()){
             Postulante getPostulante = postulante.get();
             if (postulantedto.getNombre() != null) {
@@ -62,6 +63,7 @@ public class PostulanteServiceImpl implements PostulanteService {
                 getPostulante.setCorreo(postulantedto.getCorreo());
             }
             postulanteRepository.save(getPostulante);
+            return ResponseEntity.ok("");
         }else{
             throw new NotFoundException("Postulante", postulantedto.getId());
         }

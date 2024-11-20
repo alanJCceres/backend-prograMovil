@@ -29,4 +29,12 @@ public class EmpresaController {
     public Integer loginEmpresa(@RequestBody EmpresaDTO empresaDTO){
         return this.empresaService.loginEmpresa(empresaDTO);
     }
+    @GetMapping("/{idEmpresa}")
+    public EmpresaDTO getEmpresa(@PathVariable Integer idEmpresa){
+        return empresaService.getEmpresaById(idEmpresa);
+    }
+    @PatchMapping("/{idEmpresa}")
+    public ResponseEntity<String> updateEmpresa(@PathVariable Integer idEmpresa, @RequestBody EmpresaDTO empresaDTO){
+        return this.empresaService.setEmpresa(idEmpresa, empresaDTO);
+    }
 }
