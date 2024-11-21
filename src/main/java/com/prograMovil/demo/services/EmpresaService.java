@@ -13,4 +13,5 @@ public interface EmpresaService {
     List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa);
     Integer loginEmpresa(EmpresaDTO empresa);
     ResponseEntity<String> setEmpresa(Integer idEmpresa, EmpresaDTO empresa);
+    List<ConvocatoriaForTableDTO> getConvocatoriasFiltradas(Integer idEmpresa, Boolean esVigente);
 }

@@ -1,10 +1,8 @@
 package com.prograMovil.demo.services.implement;
 
-import com.prograMovil.demo.dtos.ConvocatoriaDTO;
 import com.prograMovil.demo.dtos.ConvocatoriaForTableDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
-import com.prograMovil.demo.models.Convocatoria;
 import com.prograMovil.demo.models.Empresa;
 import com.prograMovil.demo.repositories.ConvocatoriaRepository;
 import com.prograMovil.demo.repositories.EmpresaRepository;
@@ -96,6 +94,38 @@ public class EmpresaServiceImpl implements EmpresaService {
             throw new NotFoundException("Empresa", idEmpresa);
         }
     }
+
+    @Override
+    public List<ConvocatoriaForTableDTO> getConvocatoriasFiltradas(Integer idEmpresa, Boolean esVigente){
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        List<ConvocatoriaForTableDTO> convocatoriasFiltradas = new ArrayList<>();
+        if (empresa.isPresent()) {
+            List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
+            Date fechaActual = new Date();
+            if (esVigente) {
+                convocatorias.stream()
+                        .map(dto -> {
+                            dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
+                            if (dto.isVigente()) {convocatoriasFiltradas.add(dto);}
+                            return dto;
+                        })
+                        .collect(Collectors.toList());
+            } else {
+                convocatorias.stream()
+                        .map(dto -> {
+                            dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
+                            if (!dto.isVigente()) {convocatoriasFiltradas.add(dto);}
+                            return dto;
+                        })
+                        .collect(Collectors.toList());
+            }
+
+            return convocatoriasFiltradas;
+        } else {
+            throw new NotFoundException("Empresa", idEmpresa);
+        }
+    }
+
     public EmpresaDTO toDTO(Empresa empresa){
         EmpresaDTO empresaDTO = new EmpresaDTO();
         empresaDTO.setId(empresa.getId());
