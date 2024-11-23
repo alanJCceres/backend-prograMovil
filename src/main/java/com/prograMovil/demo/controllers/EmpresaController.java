@@ -26,12 +26,8 @@ public class EmpresaController {
         return this.empresaService.getConvocatorias(idEmpresa);
     }
     @GetMapping("/{idEmpresa}/convocatoriasVigentes")
-    public List<ConvocatoriaForTableDTO> getConvocatoriasVigentes(@PathVariable Integer idEmpresa, @RequestBody Boolean esVigente){
+    public List<ConvocatoriaForTableDTO> getConvocatoriasVigentes(@PathVariable Integer idEmpresa, @RequestParam Boolean esVigente){
          return this.empresaService.getConvocatoriasFiltradas(idEmpresa, esVigente);
-    }
-    @GetMapping("/{idEmpresa}/convocatoriasNoVigentes")
-    public List<ConvocatoriaForTableDTO> getConvocatoriasNoVigentes(@PathVariable Integer idEmpresa, @RequestBody Boolean esVigente){
-        return this.empresaService.getConvocatoriasFiltradas(idEmpresa, esVigente);
     }
     @PostMapping("/login")
     public Integer loginEmpresa(@RequestBody EmpresaDTO empresaDTO){
