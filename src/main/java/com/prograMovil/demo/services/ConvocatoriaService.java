@@ -1,6 +1,7 @@
 package com.prograMovil.demo.services;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
+import com.prograMovil.demo.dtos.ConvocatoriaParaPostulantesDTO;
 import com.prograMovil.demo.dtos.EmpresaDTO;
 import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.models.Postulante;
@@ -14,4 +15,6 @@ public interface ConvocatoriaService {
     List<PostulanteDTO> getPostulantes(Integer idConvoctoria);
     PostulanteDTO getPostulante(Integer idConvocatoria, Integer idPostulante);
     List<ConvocatoriaDTO> getAllConvocatorias();
+
+    List<ConvocatoriaParaPostulantesDTO> getAllConvocatoriasParaPostulantes();
 }

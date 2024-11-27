@@ -1,6 +1,7 @@
 package com.prograMovil.demo.controllers;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
+import com.prograMovil.demo.dtos.ConvocatoriaParaPostulantesDTO;
 import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.services.implement.ConvocatoriaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ConvocatoriaController {
         return this.convocatoriaService.getPostulante(idConvocatoria, idPostulante);
     }
     @GetMapping
-    public List<ConvocatoriaDTO> getAllConvocatorias(){
-        return this.convocatoriaService.getAllConvocatorias();
+    public List<ConvocatoriaParaPostulantesDTO> getAllConvocatorias(){
+        return this.convocatoriaService.getAllConvocatoriasParaPostulantes();
     }
 }

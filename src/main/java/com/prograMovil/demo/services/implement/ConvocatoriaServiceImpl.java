@@ -1,7 +1,7 @@
 package com.prograMovil.demo.services.implement;
 
 import com.prograMovil.demo.dtos.ConvocatoriaDTO;
-import com.prograMovil.demo.dtos.EmpresaDTO;
+import com.prograMovil.demo.dtos.ConvocatoriaParaPostulantesDTO;
 import com.prograMovil.demo.dtos.PostulanteDTO;
 import com.prograMovil.demo.exceptions.NotFoundException;
 import com.prograMovil.demo.models.Convocatoria;
@@ -11,8 +11,6 @@ import com.prograMovil.demo.models.PostulanteConvocatoria;
 import com.prograMovil.demo.repositories.ConvocatoriaRepository;
 import com.prograMovil.demo.repositories.EmpresaRepository;
 import com.prograMovil.demo.services.ConvocatoriaService;
-import com.prograMovil.demo.services.implement.PostulanteServiceImpl;
-import jakarta.persistence.PostUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -106,6 +104,17 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
         return convocatorias.stream()
                 .filter(c -> fechaActual.compareTo(c.getFechaInicio()) >= 0 && fechaActual.compareTo(c.getFechaFin()) <= 0)
                 .map(ConvocatoriaDTO::new)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<ConvocatoriaParaPostulantesDTO> getAllConvocatoriasParaPostulantes(){
+        Date fechaActual = new Date();
+        List<Convocatoria> convocatorias=convocatoriaRepository.findAll();
+        return convocatorias.stream()
+                .filter(c -> fechaActual.compareTo(c.getFechaInicio()) >= 0 && fechaActual.compareTo(c.getFechaFin()) <= 0)
+                .map(ConvocatoriaParaPostulantesDTO::new)
                 .collect(Collectors.toList());
 
     }
