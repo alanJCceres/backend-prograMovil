@@ -31,6 +31,7 @@ public class ConvocatoriaParaPostulantesDTO {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public ConvocatoriaParaPostulantesDTO(Convocatoria convocatoria) {
+        this.id = convocatoria.getId();
         this.titulo = convocatoria.getTitulo();
         this.descripcion = convocatoria.getDescripcion();
         this.imagen = convocatoria.getImagen();

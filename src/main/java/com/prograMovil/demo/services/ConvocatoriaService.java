@@ -17,4 +17,6 @@ public interface ConvocatoriaService {
     List<ConvocatoriaDTO> getAllConvocatorias();
 
     List<ConvocatoriaParaPostulantesDTO> getAllConvocatoriasParaPostulantes();
+
+    ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresaById(Integer idConvocatoria);
 }

@@ -119,6 +119,15 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     }
 
+    @Override
+    public ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresaById(Integer idConvocatoria){
+        Convocatoria convocatoria = convocatoriaRepository.findById(idConvocatoria).get();
+        if (convocatoria == null) {
+            throw new NotFoundException("Convocatoria", idConvocatoria);
+        }
+        return new ConvocatoriaParaPostulantesDTO(convocatoria);
+    }
+
     public Convocatoria toConvocatoria(ConvocatoriaDTO dto, Empresa empresa){
         Convocatoria convoc = new Convocatoria();
         convoc.setTitulo(dto.getTitulo());

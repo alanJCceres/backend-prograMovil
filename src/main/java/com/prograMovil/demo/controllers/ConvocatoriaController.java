@@ -37,4 +37,8 @@ public class ConvocatoriaController {
     public List<ConvocatoriaParaPostulantesDTO> getAllConvocatorias(){
         return this.convocatoriaService.getAllConvocatoriasParaPostulantes();
     }
+    @GetMapping("postulante/{id}")
+    public ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresa(@PathVariable Integer id) {
+        return this.convocatoriaService.getConvocatoriaWithEmpresaById(id);
+    }
 }
