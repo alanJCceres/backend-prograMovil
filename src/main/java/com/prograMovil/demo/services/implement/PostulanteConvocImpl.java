@@ -47,7 +47,7 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
 
     }
     @Override
-    public ResponseEntity<String> postularse(Integer idPostulante, Integer idConvocatoria, String pathCurriculum){
+    public Boolean postularse(Integer idPostulante, Integer idConvocatoria, String pathCurriculum){
         Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
         Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
         if(postulante.isPresent() && convocatoria.isPresent()){
@@ -56,7 +56,7 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
             postulanteConvocatoria.setConvocatoria(convocatoria.get());
             postulanteConvocatoria.setCurriculum(pathCurriculum);
             postulanteConvocatoriaRepository.save(postulanteConvocatoria);
-            return ResponseEntity.ok("Postulacion exitosa");
+            return true;
         }else{
             throw new NotFoundException("No se encontro al postulante o la convocatoria", 404);
         }

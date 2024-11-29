@@ -41,7 +41,7 @@ public class PostulanteController {
             return postulanteService.setPostulante(idPostulante, postulante);
     }
     @PostMapping("/{idPostulante}/postularse/{idConvocatoria}")
-    public ResponseEntity<String> postularse(@PathVariable Integer idPostulante, @PathVariable Integer idConvocatoria, @RequestBody PostulanteConvocatoriaDTO postulanteConvocatoria) {
+    public Boolean postularse(@PathVariable Integer idPostulante, @PathVariable Integer idConvocatoria, @RequestBody PostulanteConvocatoriaDTO postulanteConvocatoria) {
         String curriculum = postulanteConvocatoria.getCurriculum();
         return postulanteConvocService.postularse(idPostulante, idConvocatoria, curriculum);
     }
