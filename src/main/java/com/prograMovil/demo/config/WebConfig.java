@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
            public void addCorsMappings(CorsRegistry registry) {
                registry.addMapping("/**") // Permite CORS en todos los endpoints
                        .allowedOrigins("http://localhost:8100") // Origen permitido (Ionic)
-                       .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
+                       .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Métodos permitidos
                        .allowCredentials(true);
            }
        };
