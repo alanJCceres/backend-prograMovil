@@ -15,7 +15,8 @@ public class PostulanteConvocatoria {
     private Integer id;
     private boolean aceptado;
     private String curriculum;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "postulante_id")
     private Postulante postulante;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "convocatoria_id")

@@ -12,7 +12,10 @@ import java.util.Optional;
 
 public interface PostulanteConvocatoriaRepository extends JpaRepository<PostulanteConvocatoria, Integer> {
     public Optional<PostulanteConvocatoria> findByConvocatoriaAndPostulante(Convocatoria convocatoria, Postulante postulante);
-    @Query("SELECT pc.convocatoria FROM PostulanteConvocatoria pc WHERE pc.postulante = :postulante")
-    List<Convocatoria> findConvocatoriasByPostulante(@Param("postulante") Postulante postulante);
+    //@Query("SELECT pc.convocatoria FROM PostulanteConvocatoria pc WHERE pc.postulante = :postulante")
+    @Query("SELECT pc FROM PostulanteConvocatoria pc " +
+            "JOIN FETCH pc.convocatoria c " +
+            "WHERE pc.postulante.id = :postulanteId")
+    List<PostulanteConvocatoria> findConvocatoriasByPostulante(@Param("postulanteId") Integer postulanteId);
 
 }

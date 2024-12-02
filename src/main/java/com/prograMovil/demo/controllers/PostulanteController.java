@@ -46,7 +46,7 @@ public class PostulanteController {
         return postulanteConvocService.postularse(idPostulante, idConvocatoria, curriculum);
     }
     @GetMapping("/{idPostulante}/all-convocatorias")
-    public List<ConvocatoriaDTO> allConvocatorias(@PathVariable Integer idPostulante){
+    public List<PostulanteConvocatoriaDTO> allConvocatorias(@PathVariable Integer idPostulante){
         return postulanteConvocService.getAllConvocatorias(idPostulante);
     }
 }

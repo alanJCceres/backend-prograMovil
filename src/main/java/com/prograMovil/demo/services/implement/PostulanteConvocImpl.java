@@ -62,12 +62,12 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
         }
     }
     @Override
-    public List<ConvocatoriaDTO> getAllConvocatorias(Integer idPostulante){
+    public List<PostulanteConvocatoriaDTO> getAllConvocatorias(Integer idPostulante){
         Optional<Postulante> postulante = postulanteRepository.findById(idPostulante);
         if(postulante.isPresent()){
-            List<Convocatoria> convocatorias = postulanteConvocatoriaRepository.findConvocatoriasByPostulante(postulante.get());
+            List<PostulanteConvocatoria> convocatorias = postulanteConvocatoriaRepository.findConvocatoriasByPostulante(idPostulante);
             return convocatorias.stream()
-                    .map(ConvocatoriaDTO::new)
+                    .map(PostulanteConvocatoriaDTO::new)
                     .collect(Collectors.toList());
 
         }else{

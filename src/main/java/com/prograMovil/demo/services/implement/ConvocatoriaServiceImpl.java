@@ -32,6 +32,9 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     @Autowired
     @Lazy
     private PostulanteServiceImpl postulanteService;
+    @Autowired
+    @Lazy
+    private PostulanteConvocImpl postulanteConvocImpl;
 
     @Override
     public ConvocatoriaDTO getConvocatoriaById(Integer idConvocatoria){

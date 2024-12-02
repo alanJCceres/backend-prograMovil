@@ -12,10 +12,14 @@ public class WebConfig implements WebMvcConfigurer {
        return new WebMvcConfigurer() {
            @Override
            public void addCorsMappings(CorsRegistry registry) {
-               registry.addMapping("/**") // Permite CORS en todos los endpoints
+               /*registry.addMapping("/**") // Permite CORS en todos los endpoints
                        .allowedOrigins("http://localhost:8100") // Origen permitido (Ionic)
                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Métodos permitidos
-                       .allowCredentials(true);
+                       .allowCredentials(true);*/
+               registry.addMapping("/**")
+                       .allowedOrigins("*")
+                       .allowedMethods("*")
+                       .allowedHeaders("*");
            }
        };
    }
