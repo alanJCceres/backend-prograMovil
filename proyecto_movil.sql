@@ -34,14 +34,19 @@ CREATE TABLE IF NOT EXISTS `convocatoria` (
   PRIMARY KEY (`id`),
   KEY `FK_convocatoria_empresa` (`empresa_id`) USING BTREE,
   CONSTRAINT `FK_convocatoria_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla proyecto_movil.convocatoria: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_movil.convocatoria: ~0 rows (aproximadamente)
 INSERT INTO `convocatoria` (`id`, `titulo`, `descripcion`, `imagen`, `fecha_inicio`, `fecha_fin`, `empresa_id`, `cantidad_max_post`, `created_at`, `updated_at`) VALUES
-	(5, 'Pasantia fullstack', 'nueva descripcion', '/ruta/imagen.png', '2024-10-11 20:00:00.000000', '2024-10-11 20:00:00.000000', 2, 20, '2024-10-30 22:41:33.000000', '2024-10-30 22:41:33.000000'),
-	(6, 'Pasantia marketing', 'nueva descripcion', '/ruta/imagen.png', '2024-10-11 20:00:00.000000', '2024-10-11 20:00:00.000000', 9, 20, '2024-10-30 22:42:03.000000', '2024-10-30 22:42:03.000000'),
-	(7, 'Pasantia contaduria publica', 'Esta es una nueva descripcion', '/ruta/imagen.png', '2024-11-04 21:29:55.000000', '2024-11-04 21:29:56.000000', 2, 10, '2024-11-04 21:30:13.000000', '2024-11-04 21:30:14.000000'),
-	(8, 'Practica preprofesional ingenieria en sistemas', 'Bienvenido a esta nueva oportunidad de formarte como ingeniero en sistemas', '/ruta/imagen.png', '2024-11-04 21:31:19.000000', '2024-11-04 21:31:20.000000', 2, 5, '2024-11-04 21:31:28.000000', '2024-11-04 21:31:31.000000');
+	(1, 'Pasantía en Marketing Digital', ' Apoya al equipo de marketing en la creación de campañas en redes sociales, análisis de métricas y desarrollo de estrategias publicitarias. Ideal para estudiantes de comunicación, marketing o afines.', 'image_1733186846023.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 1, 20, '2024-12-02 20:47:26.000000', '2024-12-02 20:47:26.000000'),
+	(2, 'Pasantia en desarrollo de software', 'Participa en proyectos ágiles de desarrollo de aplicaciones web y móviles. Aprenderás a trabajar con tecnologías como React, Node.js y bases de datos SQL. Requiere conocimientos básicos de programación.', 'image_1733186949938.jpg', '2024-12-05 20:00:00.000000', '2024-12-27 20:00:00.000000', 2, 40, '2024-12-02 20:49:09.000000', '2024-12-02 20:49:09.000000'),
+	(3, 'trabajo remoto en Desarrollo de software', 'Participa en proyectos ágiles de desarrollo de aplicaciones web y móviles. Aprenderás a trabajar con tecnologías como React, Node.js y bases de datos SQL. Requiere conocimientos básicos de programación.', 'image_1733187015669.jpg', '2024-12-06 20:00:00.000000', '2024-12-27 20:00:00.000000', 2, 50, '2024-12-02 20:50:15.000000', '2024-12-02 20:50:15.000000'),
+	(4, 'Pasantia en desarrollo de qa automatico', 'Participa en proyectos ágiles de desarrollo de aplicaciones web y móviles. Aprenderás a trabajar con tecnologías como React, Node.js y bases de datos SQL. Requiere conocimientos básicos de programación.', 'image_1733187131167.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 3, 50, '2024-12-02 20:52:11.000000', '2024-12-02 20:52:11.000000'),
+	(5, 'practica preprofesional en desarrollo frontend ', 'Participa en proyectos ágiles de desarrollo de aplicaciones web y móviles. Aprenderás a trabajar con tecnologías como React, Node.js y bases de datos SQL. Requiere conocimientos básicos de programación.', 'image_1733187241146.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 3, 10, '2024-12-02 20:54:01.000000', '2024-12-02 20:54:01.000000'),
+	(6, 'Pasantia en desarollo fullstack', 'Participa en proyectos ágiles de desarrollo de aplicaciones web y móviles. Aprenderás a trabajar con tecnologías como React, Node.js y bases de datos SQL. Requiere conocimientos básicos de programación.', 'image_1733187292205.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 3, 20, '2024-12-02 20:54:52.000000', '2024-12-02 20:54:52.000000'),
+	(7, 'Pasantía en Marketing Digital', 'Apoya al equipo de marketing en la creación de campañas en redes sociales, análisis de métricas y desarrollo de estrategias publicitarias. Ideal para estudiantes de comunicación, marketing o afines.', 'image_1733187354134.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 4, 25, '2024-12-02 20:55:54.000000', '2024-12-02 20:55:54.000000'),
+	(8, 'Pasantía en Diseño Gráfico', 'Contribuye en la creación de piezas gráficas, branding y diseño web para campañas internas y externas. Se valoran habilidades en herramientas como Photoshop, Illustrator o Canva.', 'image_1733187403160.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 5, 20, '2024-12-02 20:56:43.000000', '2024-12-02 20:56:43.000000'),
+	(9, 'Prácticas Preprofesionales en Recursos Humanos', 'Apoya en procesos de reclutamiento, selección y capacitación. Aprende a gestionar bases de datos de candidatos y coordinar actividades de bienestar laboral.', 'image_1733187530319.jpg', '2024-12-02 20:00:00.000000', '2024-12-27 20:00:00.000000', 6, 20, '2024-12-02 20:58:50.000000', '2024-12-02 20:58:50.000000');
 
 -- Volcando estructura para tabla proyecto_movil.empresa
 CREATE TABLE IF NOT EXISTS `empresa` (
@@ -56,12 +61,16 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla proyecto_movil.empresa: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_movil.empresa: ~6 rows (aproximadamente)
 INSERT INTO `empresa` (`id`, `nombre`, `ubicacion`, `imagen`, `nit`, `usuario`, `contrasenia`, `rol`, `created_at`, `updated_at`) VALUES
-	(2, 'mi nueva empresa', 'mi ubicacion #4877', '/imagen/nuevo.png', '25877777', 'Juan pinto', 'SGDFERY4364GERG43545', 'empresa', '2024-10-28 22:51:21.000000', '2024-10-28 22:51:21.000000'),
-	(9, 'JalaRest', 'av simon lopez y beijing', '/imagen/nuevo.png', '4587441', 'alan caceres', '12345678', 'empresa', '2024-11-01 20:16:49.000000', '2024-11-01 20:16:49.000000');
+	(1, 'JalaSoft', 'Av. Melchor Pérez de Olguín #2643, Cochabamba, Cochabamba · 04 km', 'image_1733185314413.jpg', '1258745154', 'jalaSoft', '12345678', 'empresa', '2024-12-02 20:21:54.000000', '2024-12-02 20:21:54.000000'),
+	(2, 'Digital Harbor', 'Av simon lopez y beijing', 'image_1733185570083.jpg', '1458745584', 'digitHar', '12345678', 'empresa', '2024-12-02 20:26:10.000000', '2024-12-02 20:26:10.000000'),
+	(3, 'AssureSoft', 'Avenida América 1108, Cochabamba, Cochabamba ', 'image_1733185690879.jpg', '1457895541', 'assure', '12345678', 'empresa', '2024-12-02 20:28:10.000000', '2024-12-02 20:28:10.000000'),
+	(4, 'EMBOL', 'Av blanco galindo km 10', 'image_1733185838453.jpg', '125457877', 'embol', '12345678', 'empresa', '2024-12-02 20:30:38.000000', '2024-12-02 20:30:38.000000'),
+	(5, 'Coca Cola', 'Calle Tarapacá 754 Ciudad de La Paz (ubicados cerca de la calle Los Andes y Plaza, Bolivia', 'image_1733185934962.jpg', '1258745558', 'cocaCola', '12345678', 'empresa', '2024-12-02 20:32:14.000000', '2024-12-02 20:32:14.000000'),
+	(6, 'Grupo editorial Kipus', 'Calle Hamiraya # 122 casi Av. Heroínas, Cochabamba', 'image_1733186022405.jpg', '4127578455', 'kipus', '12345678', 'empresa', '2024-12-02 20:33:42.000000', '2024-12-02 20:33:42.000000');
 
 -- Volcando estructura para tabla proyecto_movil.postulante
 CREATE TABLE IF NOT EXISTS `postulante` (
@@ -78,15 +87,12 @@ CREATE TABLE IF NOT EXISTS `postulante` (
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla proyecto_movil.postulante: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_movil.postulante: ~0 rows (aproximadamente)
 INSERT INTO `postulante` (`id`, `nombre`, `apellido`, `carrera`, `descripcion`, `celular`, `correo`, `usuario`, `contrasenia`, `rol`, `created_at`, `updated_at`) VALUES
-	(1, 'alan jesus ', 'caceres medrano', 'ingenieria de sistemas', 'soy un estudiante en busca de pasantias', '75971758', 'user@email.com', 'alanJ', '12345678', 'postulante', '2024-11-04 00:00:00.000000', '2024-11-10 21:52:10.000000'),
-	(2, 'maria ', 'galindo', 'Lic en contaduria', 'soy una estudiante en busca de pasantias', '75978621', 'user1@email.com', 'mariaG', '12345678', 'postulante', '2024-11-04 00:00:00.000000', '2024-11-10 21:52:09.000000'),
-	(3, 'mario Evo', 'Mamani Perez', 'Ingeniera en informatica', 'soy un estudiante entusiaste en busca de practica empresarial', '7598471', 'mario@gmail.com', 'marioMP', '12345678', 'postulante', '2024-11-04 00:00:00.000000', '2024-11-10 21:52:09.000000'),
-	(4, 'Rosanelda', 'Perez Cruz', 'Lic en psicologia', 'soy un estudiante entusiaste que busca practicas o pasantias en el area de RRHH', '75978514', 'RosaneldaZ', 'rosanelda12', '12345678', 'postulante', '2024-11-04 00:00:00.000000', '2024-11-10 21:52:08.000000'),
-	(5, 'Estefany', 'Ibañez Rodriguez', 'Lic en medicina', 'Soy un estudiante muy proactivo con ganas de aprender', '75971852', 'estefanyIR@gmail.com', 'estefy123', 'password', 'postulante', '2024-11-10 21:52:06.000000', '2024-11-10 21:52:07.000000');
+	(1, 'Alan Jesús', 'Cáceres Medrano', 'Ing en sistemas', 'Soy desarrollador de software con experiencia en Spring Boot y Angular, con enfoque en implementació', '75971702', 'caceresalan2474@gmail.com', 'alan', '12345678', 'postulante', '2024-12-02 21:00:08.000000', '2024-12-02 21:00:08.000000'),
+	(2, 'user', 'user', 'ing en sistemas', 'Soy desarrollador de software con experiencia en Spring Boot y Angular, con enfoque en implementació', '12345678', 'user@email.com', 'user', '12345678', 'postulante', '2024-12-02 21:02:07.000000', '2024-12-02 21:02:07.000000');
 
 -- Volcando estructura para tabla proyecto_movil.postulante_convocatoria
 CREATE TABLE IF NOT EXISTS `postulante_convocatoria` (
@@ -102,20 +108,9 @@ CREATE TABLE IF NOT EXISTS `postulante_convocatoria` (
   KEY `FK24ng59ik7nsr17nxaja11nyg3` (`postulante_id`),
   CONSTRAINT `FK24ng59ik7nsr17nxaja11nyg3` FOREIGN KEY (`postulante_id`) REFERENCES `postulante` (`id`),
   CONSTRAINT `FKhskr8h34hjwhuptg63i0v6vf3` FOREIGN KEY (`convocatoria_id`) REFERENCES `convocatoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla proyecto_movil.postulante_convocatoria: ~10 rows (aproximadamente)
-INSERT INTO `postulante_convocatoria` (`id`, `aceptado`, `curriculum`, `created_at`, `updated_at`, `convocatoria_id`, `postulante_id`) VALUES
-	(1, b'0', '/documents/curriculum.pdf', '2024-11-04 23:10:02.000000', '2024-11-04 23:10:03.000000', 5, 1),
-	(2, b'0', '/documents/curriculum.pdf', '2024-11-04 23:10:04.000000', '2024-11-04 23:10:05.000000', 5, 2),
-	(3, b'0', '/documents/cv.pdf', '2024-11-04 23:10:05.000000', '2024-11-04 23:10:06.000000', 8, 3),
-	(4, b'0', '/documents/cvUser.pdf', '2024-11-04 23:10:10.000000', '2024-11-04 23:10:06.000000', 8, 4),
-	(5, b'0', '/documents/cvUser123.pdf', '2024-11-04 23:10:10.000000', '2024-11-04 23:10:07.000000', 6, 1),
-	(6, b'0', '/documents/miCv2.pdf', '2024-11-04 23:10:11.000000', '2024-11-04 23:10:08.000000', 6, 2),
-	(7, b'0', '/documents/miCurriculum.pdf', '2024-11-04 23:10:12.000000', '2024-11-04 23:10:09.000000', 6, 3),
-	(8, b'0', '/documents/cv(1).pdf', '2024-11-04 23:10:13.000000', '2024-11-04 23:10:09.000000', 6, 4),
-	(9, b'0', '/documents/cvEstefy.pdf', '2024-11-10 21:52:41.000000', '2024-11-10 21:52:42.000000', 5, 5),
-	(10, b'1', '/documents/cvEstefany2.pdf', '2024-11-10 22:35:42.000000', '2024-11-10 22:35:43.000000', 8, 5);
+-- Volcando datos para la tabla proyecto_movil.postulante_convocatoria: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
