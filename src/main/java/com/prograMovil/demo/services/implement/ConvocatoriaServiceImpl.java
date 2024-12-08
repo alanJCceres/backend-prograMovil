@@ -62,14 +62,27 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
     public List<PostulanteDTO> getPostulantes(Integer idConvocatoria){
         Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
         if(convocatoria.isPresent()) {
-            List<Postulante> postulantes = convocatoria.get().getPostulantes()
+            List<PostulanteConvocatoria> postulantes = convocatoria.get().getPostulantes();
+            List<PostulanteDTO> postulanteDTOS = postulantes
                     .stream()
-                    .map(PostulanteConvocatoria::getPostulante)
+                    .map( p -> postulanteService.toDTO(p.getPostulante(),p))
                     .collect(Collectors.toList());
-            return postulantes.
-                    stream()
-                    .map(postulante -> postulanteService.toDTO(postulante,null))
+            return postulanteDTOS;
+        }else{
+            throw new NotFoundException("Convocatoria", idConvocatoria);
+        }
+    }
+    @Override
+    public List<PostulanteDTO> getPostulantesEstado(Integer idConvocatoria,String estadoPostulante){
+        Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
+        if(convocatoria.isPresent()) {
+            List<PostulanteConvocatoria> postulantes = convocatoria.get().getPostulantes();
+            List<PostulanteDTO> postulanteDTOS = postulantes
+                    .stream()
+                    .filter(p -> p.getEstado().equals(estadoPostulante))
+                    .map( p -> postulanteService.toDTO(p.getPostulante(),p))
                     .collect(Collectors.toList());
+            return postulanteDTOS;
         }else{
             throw new NotFoundException("Convocatoria", idConvocatoria);
         }
