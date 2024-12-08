@@ -20,8 +20,11 @@ public class ConvocatoriaForTableDTO {
     private String descripcion;
     private String imagen;
     private Integer cantidadMaxPost;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private Date fechaInicioReclutamiento;
+    private Date fechaFinReclutamiento;
+    private Date fechaInicioSeleccion;
+    private Date fechaFinSeleccion;
+    private String estado;
     private Integer empresa;
     private Long postulantes;
     private boolean vigente;
@@ -32,8 +35,11 @@ public class ConvocatoriaForTableDTO {
         this.descripcion = convocatoria.getDescripcion();
         this.imagen = convocatoria.getImagen();
         this.cantidadMaxPost = convocatoria.getCantidadMaxPost();
-        this.fechaInicio = convocatoria.getFechaInicio();
-        this.fechaFin = convocatoria.getFechaFin();
+        this.fechaInicioReclutamiento = convocatoria.getFechaInicioReclutamiento();
+        this.fechaFinReclutamiento = convocatoria.getFechaFinReclutamiento();
+        this.fechaInicioSeleccion = convocatoria.getFechaInicioSeleccion();
+        this.fechaFinSeleccion = convocatoria.getFechaFinSeleccion();
+        this.estado = convocatoria.getEstado();
         this.empresa = convocatoria.getEmpresa().getId();
         this.postulantes = postulantes;
     }

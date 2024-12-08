@@ -24,8 +24,10 @@ public class ConvocatoriaParaPostulantesDTO {
     private String descripcion;
     private String imagen;
     private Integer cantidadMaxPost;
-    private String fechaInicio;
-    private String fechaFin;
+    private String fechaInicioReclutamiento;
+    private String fechaFinReclutamiento;
+    private String fechaInicioSeleccion;
+    private String fechaFinSeleccion;
     private EmpresaDTO empresa;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -36,8 +38,10 @@ public class ConvocatoriaParaPostulantesDTO {
         this.descripcion = convocatoria.getDescripcion();
         this.imagen = convocatoria.getImagen();
         this.cantidadMaxPost = convocatoria.getCantidadMaxPost();
-        this.fechaInicio = convertAndFormatDate(convocatoria.getFechaInicio());
-        this.fechaFin = convertAndFormatDate(convocatoria.getFechaFin());
+        this.fechaInicioReclutamiento = convertAndFormatDate(convocatoria.getFechaInicioReclutamiento());
+        this.fechaFinReclutamiento = convertAndFormatDate(convocatoria.getFechaFinReclutamiento());
+        this.fechaInicioSeleccion = convertAndFormatDate(convocatoria.getFechaInicioSeleccion());
+        this.fechaFinSeleccion = convertAndFormatDate(convocatoria.getFechaFinSeleccion());
         this.empresa = new EmpresaDTO(convocatoria.getEmpresa());
     }
 

@@ -18,7 +18,9 @@ public class PostulanteConvocatoriaDTO {
         this.aceptado = postulanteConvocatoria.isAceptado();
         this.curriculum = postulanteConvocatoria.getCurriculum();
         Convocatoria nuevo = postulanteConvocatoria.getConvocatoria();
-        this.convocatoria = new ConvocatoriaDTO(nuevo.getId(), nuevo.getTitulo(),nuevo.getDescripcion(),
-                nuevo.getImagen(),nuevo.getCantidadMaxPost(),nuevo.getFechaInicio(), nuevo.getFechaFin(),nuevo.getEmpresa().getId());
+        /*this.convocatoria = new ConvocatoriaDTO(nuevo.getId(), nuevo.getTitulo(),nuevo.getDescripcion(),
+                nuevo.getImagen(),nuevo.getCantidadMaxPost(),nuevo.getFechaInicioReclutamiento(), nuevo.getFechaFinReclutamiento()
+                nuevo.getFechaInicioSeleccion() nuevo.getFechaFinSeleccion(),nuevo.getEmpresa().getId());*/
+        this.convocatoria = new ConvocatoriaDTO(nuevo);
     }
 }

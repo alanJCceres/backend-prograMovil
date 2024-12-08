@@ -25,9 +25,9 @@ public class ConvocatoriaController {
     public ConvocatoriaDTO getConvocatoria(@PathVariable Integer id) {
         return this.convocatoriaService.getConvocatoriaById(id);
     }
-    @GetMapping("/{id}/postulantes")
-    public List<PostulanteDTO> getPostulantes(@PathVariable Integer id){
-        return this.convocatoriaService.getPostulantes(id);
+    @GetMapping("/{idConvocatoria}/postulantes")
+    public List<PostulanteDTO> getPostulantes(@PathVariable Integer idConvocatoria){
+        return this.convocatoriaService.getPostulantes(idConvocatoria);
     }
     @GetMapping("/{idConvocatoria}/postulantes/{idPostulante}")
     public PostulanteDTO getPostulante(@PathVariable Integer idConvocatoria, @PathVariable Integer idPostulante) {
@@ -37,8 +37,8 @@ public class ConvocatoriaController {
     public List<ConvocatoriaParaPostulantesDTO> getAllConvocatorias(){
         return this.convocatoriaService.getAllConvocatoriasParaPostulantes();
     }
-    @GetMapping("postulante/{id}")
-    public ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresa(@PathVariable Integer id) {
-        return this.convocatoriaService.getConvocatoriaWithEmpresaById(id);
+    @GetMapping("/postulante/{idConvocatoria}")
+    public ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresa(@PathVariable Integer idConvocatoria) {
+        return this.convocatoriaService.getConvocatoriaWithEmpresaById(idConvocatoria);
     }
 }

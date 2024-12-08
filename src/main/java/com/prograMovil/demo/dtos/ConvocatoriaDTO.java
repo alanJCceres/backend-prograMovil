@@ -22,19 +22,24 @@ public class ConvocatoriaDTO {
     private String descripcion;
     private String imagen;
     private Integer cantidadMaxPost;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String estado;
+    private Date fechaInicioReclutamiento;
+    private Date fechaFinReclutamiento;
+    private Date fechaInicioSeleccion;
+    private Date fechaFinSeleccion;
     private Integer empresa;
-    //private boolean vigente;
-    //private List<Postulante> postulanteList;
 
     public ConvocatoriaDTO(Convocatoria convocatoria) {
+        this.id = convocatoria.getId();
         this.titulo = convocatoria.getTitulo();
         this.descripcion = convocatoria.getDescripcion();
         this.imagen = convocatoria.getImagen();
         this.cantidadMaxPost = convocatoria.getCantidadMaxPost();
-        this.fechaInicio = convocatoria.getFechaInicio();
-        this.fechaFin = convocatoria.getFechaFin();
+        this.estado = convocatoria.getEstado() == null ? "Por comenzar": convocatoria.getEstado();
+        this.fechaInicioReclutamiento = convocatoria.getFechaInicioReclutamiento();
+        this.fechaFinReclutamiento = convocatoria.getFechaFinReclutamiento();
+        this.fechaInicioSeleccion = convocatoria.getFechaInicioSeleccion();
+        this.fechaFinSeleccion = convocatoria.getFechaFinSeleccion();
         this.empresa = convocatoria.getEmpresa().getId();
     }
 }

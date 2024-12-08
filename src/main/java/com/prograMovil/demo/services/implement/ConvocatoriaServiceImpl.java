@@ -38,11 +38,11 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     @Override
     public ConvocatoriaDTO getConvocatoriaById(Integer idConvocatoria){
-        Convocatoria convocatoria = convocatoriaRepository.findById(idConvocatoria).get();
-        if (convocatoria == null) {
+        Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
+        if (convocatoria.isEmpty()) {
             throw new NotFoundException("Convocatoria", idConvocatoria);
         }
-        return toDTO(convocatoria);
+        return new ConvocatoriaDTO(convocatoria.get());
     }
     @Override
     public ConvocatoriaDTO saveConvocatoria(ConvocatoriaDTO convocatoria){
@@ -105,7 +105,7 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
         Date fechaActual = new Date();
         List<Convocatoria> convocatorias=convocatoriaRepository.findAll();
         return convocatorias.stream()
-                .filter(c -> fechaActual.compareTo(c.getFechaInicio()) >= 0 && fechaActual.compareTo(c.getFechaFin()) <= 0)
+                .filter(c -> fechaActual.compareTo(c.getFechaInicioReclutamiento()) >= 0 && fechaActual.compareTo(c.getFechaFinReclutamiento()) <= 0)
                 .map(ConvocatoriaDTO::new)
                 .collect(Collectors.toList());
 
@@ -116,7 +116,7 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
         Date fechaActual = new Date();
         List<Convocatoria> convocatorias=convocatoriaRepository.findAll();
         return convocatorias.stream()
-                .filter(c -> fechaActual.compareTo(c.getFechaInicio()) >= 0 && fechaActual.compareTo(c.getFechaFin()) <= 0)
+                .filter(c -> (c.getEstado().equals("En curso")))
                 .map(ConvocatoriaParaPostulantesDTO::new)
                 .collect(Collectors.toList());
 
@@ -124,34 +124,16 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     @Override
     public ConvocatoriaParaPostulantesDTO getConvocatoriaWithEmpresaById(Integer idConvocatoria){
-        Convocatoria convocatoria = convocatoriaRepository.findById(idConvocatoria).get();
-        if (convocatoria == null) {
+        Optional<Convocatoria> convocatoria = convocatoriaRepository.findById(idConvocatoria);
+        if (convocatoria.isEmpty()) {
             throw new NotFoundException("Convocatoria", idConvocatoria);
         }
-        return new ConvocatoriaParaPostulantesDTO(convocatoria);
+        return new ConvocatoriaParaPostulantesDTO(convocatoria.get());
     }
 
     public Convocatoria toConvocatoria(ConvocatoriaDTO dto, Empresa empresa){
-        Convocatoria convoc = new Convocatoria();
-        convoc.setTitulo(dto.getTitulo());
-        convoc.setDescripcion(dto.getDescripcion());
-        convoc.setImagen(dto.getImagen());
-        convoc.setCantidadMaxPost(dto.getCantidadMaxPost());
-        convoc.setFechaInicio(dto.getFechaInicio());
-        convoc.setFechaFin(dto.getFechaFin());
+        Convocatoria convoc = new Convocatoria(dto);
         convoc.setEmpresa(empresa);
         return convoc;
-    }
-    public ConvocatoriaDTO toDTO(Convocatoria convocatoria){
-        ConvocatoriaDTO dto = new ConvocatoriaDTO();
-        dto.setId(convocatoria.getId());
-        dto.setTitulo(convocatoria.getTitulo());
-        dto.setDescripcion(convocatoria.getDescripcion());
-        dto.setImagen(convocatoria.getImagen());
-        dto.setCantidadMaxPost(convocatoria.getCantidadMaxPost());
-        dto.setFechaInicio(convocatoria.getFechaInicio());
-        dto.setFechaFin(convocatoria.getFechaFin());
-        dto.setEmpresa(convocatoria.getEmpresa().getId());
-        return dto;
     }
 }
