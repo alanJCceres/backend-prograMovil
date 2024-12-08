@@ -59,4 +59,24 @@ public class ImagenController {
         }
     }
 
+    @GetMapping("/obtener-pdf/{nombrePdf:.+}")
+    public ResponseEntity<?> obtenerPdf(@PathVariable String nombrePdf) {
+        try {
+            Path directorioArchivos = Paths.get("src/main/resources/uploads");
+            Path filePath = directorioArchivos.resolve(nombrePdf);
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (MalformedURLException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }
