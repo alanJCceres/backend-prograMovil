@@ -36,8 +36,15 @@ public class EmpresaController {
     @GetMapping("/{idEmpresa}")
     public EmpresaDTO getEmpresa(@PathVariable Integer idEmpresa){
         return empresaService.getEmpresaById(idEmpresa);
+        /*
+            {
+        id:9, 
+        type:"empresa"
+        }
+        */
+    
     }
-    @PatchMapping("/{idEmpresa}")
+    @PutMapping("/{idEmpresa}")
     public ResponseEntity<String> updateEmpresa(@PathVariable Integer idEmpresa, @RequestBody EmpresaDTO empresaDTO){
         return this.empresaService.setEmpresa(idEmpresa, empresaDTO);
     }
