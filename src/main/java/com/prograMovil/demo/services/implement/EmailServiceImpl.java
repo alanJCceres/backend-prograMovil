@@ -30,20 +30,48 @@ public class EmailServiceImpl implements EmailService {
     }
     @Override
     public void sendMail(EmailDTO email) throws MessagingException {
-        String asunto="Respuesta a la postulación de la convocatoria "+email.getTituloConvocatoria();;
+        String asunto="";
         String mensaje="";
         if(email.getIdPostulante() != null){
-            postulanteConvocImpl.setAceptado(email.getIdConvocatoria(), email.getIdPostulante(), email.isAceptado());
+            postulanteConvocImpl.setEstado(email.getIdConvocatoria(), email.getIdPostulante(), email.getEstadoPostulante());
 
         }else{
             throw new MessagingException("El postulante no existe");
         }
-        if(email.isAceptado()){
-            mensaje = "Felicidades fuiste aceptado en la convocatoria "+email.getTituloConvocatoria()+". La empresa" +
-                    " pronto se pondra en contacto con usted.";
-        }else{
-            mensaje = "Después de examinar cuidadosamente la hoja de vida que enviaste a la convocatoria "+email.getTituloConvocatoria()+
-                    " optamos por continuar con otro candidato.";
+        switch(email.getEstadoPostulante()){
+            case "Preseleccionado":{
+                asunto = "Resultado de la evaluación inicial para la convocatoria "+email.getTituloConvocatoria();
+                mensaje = "Estimado/a Postulante,\n" +
+                        "\n" +
+                        "Nos complace informarle que, tras una revisión exhaustiva de su perfil y de su postulación, usted ha sido preseleccionado/a para continuar en el proceso de selección de la convocatoria "+email.getTituloConvocatoria()+".\n" +
+                        "\n" +
+                        "Como siguiente paso, se llevarán a cabo las etapas correspondientes a entrevistas, evaluaciones o cualquier otro requisito necesario. La empresa se pondrá en contacto con usted próximamente para proporcionarle detalles específicos sobre estas etapas y coordinar los pasos a seguir.\n" +
+                        "\n" +
+                        "Le agradecemos su interés y confianza en formar parte de esta oportunidad, y le deseamos mucho éxito en las siguientes fases del proceso.";
+                break;
+            }
+            case "Rechazado":{
+                asunto = "Resultado de la evaluación para la convocatoria "+email.getTituloConvocatoria();
+                mensaje = "Estimado/a Postulante,\n" +
+                        "\n" +
+                        "Agradecemos su interés en participar en la convocatoria "+email.getTituloConvocatoria()+" y la confianza depositada en nosotros al postularse.\n" +
+                        "\n" +
+                        "Lamentamos informarle que, tras un análisis detallado de su perfil, no ha sido posible seleccionarlo/a para continuar en el proceso. La decisión no refleja de ninguna manera una falta de méritos, sino más bien la gran competitividad y el alto nivel de los postulantes.\n" +
+                        "\n" +
+                        "Le animamos a que siga participando en nuestras futuras convocatorias y le deseamos mucho éxito en sus próximos proyectos profesionales.";
+                break;
+            }
+            case "Aceptado":{
+                asunto = "Felicitaciones: ha sido seleccionado/a para la convocatoria "+email.getTituloConvocatoria();
+                mensaje = "Estimado/a Postulante,\n" +
+                        "\n" +
+                        "Es un gusto informarle que, tras completar todas las etapas del proceso de selección, usted ha sido seleccionado/a para "+email.getTituloConvocatoria()+".\n" +
+                        "\n" +
+                        "En los próximos días, la empresa se pondrá en contacto con usted para brindarle detalles adicionales sobre su incorporación, incluyendo fechas, horarios y otros aspectos relevantes.\n" +
+                        "\n" +
+                        "Le agradecemos su esfuerzo y dedicación durante este proceso y le damos la bienvenida a nuestra organización. Estamos emocionados/as por lo que lograremos juntos/as.";
+                break;
+            }
         }
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();

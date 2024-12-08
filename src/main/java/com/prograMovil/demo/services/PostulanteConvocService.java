@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface PostulanteConvocService {
-    void setAceptado(Integer idConvocatoria,Integer idPostulante, boolean aceptado);
+    void setEstado(Integer idConvocatoria,Integer idPostulante, String estado);
     Boolean postularse(Integer idPostulante,Integer idConvocatoria,String pathCurriculum);
     List<PostulanteConvocatoriaDTO> getAllConvocatorias(Integer idPostulante);
 }

@@ -36,14 +36,14 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
     private PostulanteRepository postulanteRepository;
 
     @Override
-    public void setAceptado(Integer idConvocatoria,Integer idPostulante, boolean aceptado){
-       /* PostulanteConvocatoria postulanteConvocatoria = getPostulantConvocatoria(idPostulante,idConvocatoria);
+    public void setEstado(Integer idConvocatoria,Integer idPostulante, String estado){
+        PostulanteConvocatoria postulanteConvocatoria = getPostulantConvocatoria(idPostulante,idConvocatoria);
         if(postulanteConvocatoria != null){
-            postulanteConvocatoria.setAceptado(aceptado);
+            postulanteConvocatoria.setEstado(estado);
             postulanteConvocatoriaRepository.save(postulanteConvocatoria);
         }else{
             throw new NotFoundException("No se encontro la entidad", 404);
-        }*/
+        }
 
     }
     @Override
