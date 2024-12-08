@@ -10,12 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostulanteConvocatoriaDTO {
-    private boolean aceptado;
+    private String estado;
     private String curriculum;
     private ConvocatoriaDTO convocatoria;
 
     public PostulanteConvocatoriaDTO(PostulanteConvocatoria postulanteConvocatoria) {
-        this.aceptado = postulanteConvocatoria.isAceptado();
+        this.estado = postulanteConvocatoria.getEstado() == null ? "Pendiente":postulanteConvocatoria.getEstado();
         this.curriculum = postulanteConvocatoria.getCurriculum();
         Convocatoria nuevo = postulanteConvocatoria.getConvocatoria();
         /*this.convocatoria = new ConvocatoriaDTO(nuevo.getId(), nuevo.getTitulo(),nuevo.getDescripcion(),

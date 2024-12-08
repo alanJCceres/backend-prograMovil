@@ -37,13 +37,13 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
 
     @Override
     public void setAceptado(Integer idConvocatoria,Integer idPostulante, boolean aceptado){
-        PostulanteConvocatoria postulanteConvocatoria = getPostulantConvocatoria(idPostulante,idConvocatoria);
+       /* PostulanteConvocatoria postulanteConvocatoria = getPostulantConvocatoria(idPostulante,idConvocatoria);
         if(postulanteConvocatoria != null){
             postulanteConvocatoria.setAceptado(aceptado);
             postulanteConvocatoriaRepository.save(postulanteConvocatoria);
         }else{
             throw new NotFoundException("No se encontro la entidad", 404);
-        }
+        }*/
 
     }
     @Override
@@ -55,6 +55,7 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
             postulanteConvocatoria.setPostulante(postulante.get());
             postulanteConvocatoria.setConvocatoria(convocatoria.get());
             postulanteConvocatoria.setCurriculum(pathCurriculum);
+            postulanteConvocatoria.setEstado("Pendiente");
             postulanteConvocatoriaRepository.save(postulanteConvocatoria);
             return true;
         }else{
@@ -87,14 +88,14 @@ public class PostulanteConvocImpl implements PostulanteConvocService {
     }
     public PostulanteConvocatoriaDTO toDTO(PostulanteConvocatoria postulante) {
         PostulanteConvocatoriaDTO dto = new PostulanteConvocatoriaDTO();
-        dto.setAceptado(postulante.isAceptado());
+        dto.setEstado(postulante.getEstado() == null ? "Pendiente":postulante.getEstado());
         dto.setCurriculum(postulante.getCurriculum());
         return dto;
     }
-    public PostulanteConvocatoria toEntity(PostulanteConvocatoriaDTO dto) {
+    /*public PostulanteConvocatoria toEntity(PostulanteConvocatoriaDTO dto) {
         PostulanteConvocatoria postulante = new PostulanteConvocatoria();
-        postulante.setAceptado(dto.isAceptado());
+        postulante.setEstado(dto.getEstado());
         postulante.setCurriculum(dto.getCurriculum());
         return postulante;
-    }
+    }*/
 }
