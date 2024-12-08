@@ -79,21 +79,36 @@ public class EmpresaServiceImpl implements EmpresaService {
 
     @Override
     public List<ConvocatoriaForTableDTO> getConvocatorias(Integer idEmpresa){
-        return null;
-        /*Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
         if (empresa.isPresent()) {
-            List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
-            Date fechaActual = new Date();
-
+             List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
+             return convocatorias;
+            /*Date fechaActual = new Date();
             return convocatorias.stream()
+                    .map(ConvocatoriaForTableDTO::new)
+                    .collect(Collectors.toList());*/
+            /*return convocatorias.stream()
                     .map(dto -> {
                         dto.setVigente(dto.getFechaInicio().before(fechaActual) && dto.getFechaFin().after(fechaActual));
                         return dto;
                     })
+                    .collect(Collectors.toList());*/
+        } else {
+            throw new NotFoundException("Empresa", idEmpresa);
+        }
+    }
+    @Override
+    public List<ConvocatoriaForTableDTO> getConvocatoriasEstado(Integer idEmpresa,String estado){
+        Optional<Empresa> empresa = empresaRepository.findById(idEmpresa);
+        if (empresa.isPresent()) {
+            List<ConvocatoriaForTableDTO> convocatorias = convocatoriaRepository.findAllDtoByEmpresaId(empresa.get());
+            //return convocatorias;
+            return convocatorias.stream()
+                    .filter(convocatoria -> convocatoria.getEstado().equals(estado))
                     .collect(Collectors.toList());
         } else {
             throw new NotFoundException("Empresa", idEmpresa);
-        }*/
+        }
     }
 
     @Override

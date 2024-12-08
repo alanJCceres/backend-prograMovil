@@ -27,7 +27,7 @@ public class ConvocatoriaForTableDTO {
     private String estado;
     private Integer empresa;
     private Long postulantes;
-    private boolean vigente;
+    //private boolean vigente;
 
     public ConvocatoriaForTableDTO(Convocatoria convocatoria, Long postulantes) {
         this.id = convocatoria.getId();

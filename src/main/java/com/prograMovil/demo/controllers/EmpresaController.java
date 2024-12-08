@@ -22,13 +22,18 @@ public class EmpresaController {
         return new ResponseEntity<>(empresaDTO1, HttpStatus.CREATED);
     }
     @GetMapping("/{idEmpresa}/convocatorias")
-    public List<ConvocatoriaForTableDTO> getConvocatorias(@PathVariable Integer idEmpresa){
-        return this.empresaService.getConvocatorias(idEmpresa);
+    public List<ConvocatoriaForTableDTO> getConvocatorias(@PathVariable Integer idEmpresa,@RequestParam(required = false) String estado){
+        if (estado != null) {
+            return this.empresaService.getConvocatoriasEstado(idEmpresa,estado);
+        } else {
+            return this.empresaService.getConvocatorias(idEmpresa);
+        }
     }
-    @GetMapping("/{idEmpresa}/convocatoriasVigentes")
+
+    /*@GetMapping("/{idEmpresa}/convocatoriasVigentes")
     public List<ConvocatoriaForTableDTO> getConvocatoriasVigentes(@PathVariable Integer idEmpresa, @RequestParam Boolean esVigente){
          return this.empresaService.getConvocatoriasFiltradas(idEmpresa, esVigente);
-    }
+    }*/
     @PostMapping("/login")
     public Integer loginEmpresa(@RequestBody EmpresaDTO empresaDTO){
         return this.empresaService.loginEmpresa(empresaDTO);
@@ -36,12 +41,6 @@ public class EmpresaController {
     @GetMapping("/{idEmpresa}")
     public EmpresaDTO getEmpresa(@PathVariable Integer idEmpresa){
         return empresaService.getEmpresaById(idEmpresa);
-        /*
-            {
-        id:9, 
-        type:"empresa"
-        }
-        */
     
     }
     @PutMapping("/{idEmpresa}")
